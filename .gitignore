@@ -7,3 +7,6 @@ big_data/
 
 # Stray visual studio files
 .vs
+
+# Pycache
+__pycache__
