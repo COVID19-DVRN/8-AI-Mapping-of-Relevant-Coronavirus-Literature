@@ -44,12 +44,11 @@ class Preprocessor:
 		min_token_length: minimum character length of a word (e.g, if it is 3, 'an' is removed)
     
 		------ATTRIBUTES STORED------
-		preprocessed_text_: a list of words preprocessed. Use .map() functionality in pandas to compute
-			dataframe column
+		preprocessed_text_: a list of lists for of words preprocessed
 		"""
 		self.preprocessed_text_ = self.text_.map(
 			lambda p: self._preprocess_row(p, lemmatize, stopwords=stopwords, min_token_length=min_token_length)
-		)
+		).tolist()
 		self.stopwords_ = stopwords
 		self.min_token_length_ = min_token_length
 
@@ -82,6 +81,24 @@ class Preprocessor:
 		result = [item for item in result if item not in stopwords]
 
 		return result
+
+	def get_bigrams_from_preprocessed(self, min_count=0.1, threshold=10., scoring='default'):
+		"""
+        Computes bigrams after preprocessing. NOTE: overwrites preprocessed_text_ attribute.
+
+        ------PARAMETERS------
+        min_count: minimum count of bigrams to be included
+        threshold: scoring threshold  for bigrams for inclusion
+        scoring: gensim Phrases scoring function to evaluate bigrams for threshold
+		"""
+		x = Phrases(self.preprocessed_text_, min_count=min_count, threshold=threshold, scoring=scoring)
+		x = Phraser(x)
+
+		bigram_token = []
+		for sent in self.preprocessed_text_:
+			bigram_token.append(x[sent])
+		
+		self.preprocessed_text_ = bigram_token
 
 	def create_nlp_items_from_preprocessed_df(self,
 											  no_below=2,
