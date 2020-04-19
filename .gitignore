@@ -1,6 +1,9 @@
 # Big data directories
 big_data/
 
+# Writeup
+Paper/
+
 # Jupyter Notebook stuff
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
