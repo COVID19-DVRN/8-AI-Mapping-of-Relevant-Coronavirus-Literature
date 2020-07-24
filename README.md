@@ -30,6 +30,6 @@ The README.md file in this repository provides well-documented introduction to t
 <!-- Dependencies -->
 ## Dependencies
 Key packages used in the model:<br />
-sklearn
-Gensim 
-nltk
+sklearn <br />
+Gensim <br />
+nltk <br />
