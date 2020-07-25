@@ -6,8 +6,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Prerequisites
 ### Libraries
-* gensim
-* nltk
+* gensim (version 3.8.0)
+* nltk (version 3.4.5)
 
 ### Programs
 
